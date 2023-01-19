@@ -13,22 +13,23 @@ else{
 console.log(nombreDeUsuario);
 console.log(edad)
 
-function PrecioDeProducto () {
-    let PrecioMalbec = 1500;
-    let PrecioCabernet = 1200;
-    let PrecioBonarda = 1700;
+function obtenerPrecioDeProducto () {
+    let precioMalbec = 1500;
+    let precioCabernet = 1200;
+    let precioBonarda = 1700;
 
-    let producto = prompt ("Ingrese el producto que desea comprar : (Malbec,Cabernet,Bonarda)");
+    let producto = prompt ("Ingrese el producto que desea comprar : (malbec,cabernet,bonarda)");
     let precio;
+   
     switch (producto) {
-        case "Malbec" :
-            precio = PrecioMalbec;
+        case "malbec" :
+            precio = precioMalbec;
             break;
-        case "Cabernet" :
-            precio = PrecioCabernet;
+        case "cabernet" :
+            precio = precioCabernet;
             break;
-        case "Bonarda" :
-            precio = PrecioBonarda;
+        case "bonarda" :
+            precio = precioBonarda;
             break;
         default:
             precio = false;
@@ -38,8 +39,8 @@ function PrecioDeProducto () {
     return precio;
 }
 
-function CantidadCuotas() {
-    let cuotas = number(prompt("ingrese la cantidad de cuotas con las que desea pagar (3,6 o 12"));
+function obtenerCantidadCuotas() {
+    let cuotas = Number(prompt("ingrese la cantidad de cuotas con las que desea pagar (3,6 o 12)"));
 
     if (!(cuotas===3|| cuotas===6|| cuotas===12)) {
         cuotas = false;
@@ -48,44 +49,47 @@ function CantidadCuotas() {
     return cuotas;
 }
 
-function ValorDeCuota() {
-    let TresCuotas = 1.25;
-    let SeisCuotas = 1.3;
-    let DoceCuotas = 1.5;
+function obtenerValorDeCuota(precio, cantidadCuotas) {
+    let interesTresCuotas = 1.25;
+    let interesSeisCuotas = 1.3;
+    let interesDoceCuotas = 1.5;
 
-    let ValorDeCuota;
+    let valorDeCuota;
 
-    if (cuotas===3){
-        ValorDeCuota = precio * TresCuotas;
+    if (cantidadCuotas===3){
+        valorDeCuota = precio * interesTresCuotas;
     }
 
-    if (cuotas===6){
-        ValorDeCuota = precio * SeisCuotas;
+    if (cantidadCuotas===6){
+        valorDeCuota = precio * interesSeisCuotas;
     }
 
-    if (cuotas===12){
-        ValorDeCuota = precio * DoceCuotas;
+    if (cantidadCuotas===12){
+        valorDeCuota = precio * interesDoceCuotas;
     }
 
-    return ValorDeCuota / CantidadCuotas
+    return valorDeCuota / cantidadCuotas
 }
 
-function CalculoCuotas (){
-    let precio = PrecioDeProducto();
-    let CantidadCuotas = CantidadCuotas();
-    
+function calculoCuotas (){
+    let precio = obtenerPrecioDeProducto();
+    let cantidadCuotas = obtenerCantidadCuotas();
+    let valorDeCuota
 
     if (precio === false) {
         alert ("Ingrese un producto valido de los indicados");
         return;
     }
     
-    if (CantidadCuotas === false) {
+    if (cantidadCuotas === false) {
         alert ("Ingrese un valor de cuotas valido (3, 6 o 12)");
         return;
     }
+    
+    valorDeCuota = obtenerValorDeCuota (precio,cantidadCuotas)
 
+    alert ("Precio total de $ " + precio + " en " + cantidadCuotas + " , cuotas de $" + valorDeCuota)
 }
 
-CalculoCuotas ();
+calculoCuotas ();
 
